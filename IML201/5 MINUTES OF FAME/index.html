@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Minutes of Fame | Jason Rui</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --muted: #888888;
+      --media-border: rgba(255, 255, 255, 0.12);
+      --media-bg: rgba(25, 25, 25, 0.8);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* --- 背景：Image Project --- */
+    #heroBg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+      background: 
+        linear-gradient(to bottom, rgba(0,0,0,0.5), #000),
+        url('../assets/FINAL IMAGE PROJECT.png') center/cover no-repeat;
+      opacity: 0.4; 
+      filter: blur(10px) saturate(0.8); 
+      transition: opacity 0.1s linear;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 800;
+      line-height: 0.85;
+      margin: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-desc {
+      margin-top: 40px;
+      font-size: 1.2rem;
+      max-width: 550px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 100px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .content-row {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .content-row.reversed {
+      grid-template-columns: 1.6fr 1fr;
+    }
+
+    .text-side {
+      position: sticky;
+      top: 100px;
+    }
+
+    /* --- 媒体容器（针对 Iframe 优化） --- */
+    .media-container {
+      width: 100%;
+      border: 1px solid var(--media-border);
+      background-color: var(--media-bg);
+      backdrop-filter: blur(10px);
+      padding: 8px; /* 减小内边距，让 iframe 显得更整洁 */
+      border-radius: 16px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      transition: all 0.5s ease;
+      overflow: hidden;
+      aspect-ratio: 16 / 9; /* 强制保持视频比例 */
+    }
+
+    .media-container iframe {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .media-container:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px);
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.6s ease;
+    }
+
+    h2 { font-size: 2.6rem; margin: 0 0 24px; letter-spacing: -0.04em; line-height: 1.1; }
+    .description { color: var(--muted); font-size: 1.15rem; line-height: 1.7; }
+    .num-tag { font-family: serif; font-size: 1rem; color: var(--muted); margin-bottom: 12px; display: block; font-style: italic; }
+
+    .conclusion {
+      padding: 180px 0;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .conclusion h3 { font-size: 3.2rem; margin-bottom: 30px; letter-spacing: -0.04em; }
+
+    .footer {
+      padding: 60px 0;
+      border-top: 1px solid #111;
+      text-align: center;
+      color: #333;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .content-row, .content-row.reversed { grid-template-columns: 1fr; }
+      .text-side { position: static; }
+      .container { padding: 0 24px; }
+      .media-container { aspect-ratio: 16 / 9; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="heroBg"></div>
+
+  <div class="container">
+    <header class="hero-section">
+      <span class="eyebrow">IML201 Final Project</span>
+      <h1>5 MINUTES<br>OF FAME</h1>
+      <p class="hero-desc">
+        A reflection on emotion, time, power, surveillance, and self-observation.
+      </p>
+    </header>
+
+    <section class="section" id="introduction">
+      <div style="max-width: 700px;">
+        <span class="num-tag">01 / Intro</span>
+        <h2>The Lag</h2>
+        <p class="description">
+          Communication speed is now a social norm. <strong>I don’t always reply immediately, and neither do others.</strong>
+          <br><br>
+          But our emotions do not always move at the pace of a fiber-optic cable.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="image-project">
+      <div class="content-row reversed">
+        <div class="media-container" style="aspect-ratio: auto;">
+          <img src="../assets/FINAL IMAGE PROJECT.png" alt="Image Project" />
+        </div>
+        <div class="text-side">
+          <span class="num-tag">02 / Visuals</span>
+          <h2>Changing Form</h2>
+          <p class="description">
+            I began to notice that intimacy hasn't disappeared; it has simply transitioned through a new medium. 
+            The feeling remains, but the vessel has changed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="digital-argument">
+      <div class="content-row">
+        <div class="text-side">
+          <span class="num-tag">03 / Argument</span>
+          <h2>Power of Time</h2>
+          <p class="description">
+            Time is not neutral. <br><br>
+            The speed of a reply is a hierarchy. <strong>Some people can wait. Others cannot.</strong>
+          </p>
+        </div>
+        <div class="media-container">
+          <iframe 
+            src="https://drive.google.com/file/d/1cKXr0EIXuREf8eYTq1goNjvhq_KpqQdV/preview" 
+            allow="autoplay">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="surveillance">
+      <div class="content-row reversed">
+        <div class="media-container">
+          <iframe 
+            src="https://drive.google.com/file/d/11W2l3atdvMuZHadM60sqAM8Ow-t1MdpK/preview" 
+            allow="autoplay">
+          </iframe>
+        </div>
+        <div class="text-side">
+          <span class="num-tag">04 / Observation</span>
+          <h2>The Internal Gaze</h2>
+          <p class="description">
+            Power doesn't just watch from the outside. <br><br>
+            It teaches you to watch yourself — <strong>to check your appearance, to adjust how you present, to imagine how others might see you.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portrait">
+      <div class="content-row">
+        <div class="text-side">
+          <span class="num-tag">05 / Self</span>
+          <h2>Persistence</h2>
+          <p class="description">
+            Observe the observer. <br><br>
+            I am both the one who looks, and the one being looked at.
+            <br><br>
+            I have always been aware of how I look. This self-portrait is not a discovery, but a continuation. 
+            <strong>I still see myself clearly — and I choose to keep looking.</strong>
+          </p>
+        </div>
+        <div class="media-container" style="max-width: 480px; aspect-ratio: auto;">
+          <img src="../assets/self.jpg" alt="Self Portrait" />
+        </div>
+      </div>
+    </section>
+
+    <div class="conclusion">
+      <h3>Awareness is the destination.</h3>
+      <p style="color: var(--muted); font-size: 1.25rem; line-height: 1.8;">
+        Knowing these structures exist does not mean I have to escape them. <br>
+        It means I understand them — <strong>and still choose to live within them.</strong>
+      </p>
+    </div>
+
+    <footer class="footer">
+      JASON RUI &copy; 2026 // 5 MINUTES OF FAME
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroBg = document.getElementById('heroBg');
+
+      window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY;
+        const newOpacity = 0.3 - (scrollPos / 5000); 
+        if (heroBg) {
+          heroBg.style.opacity = Math.max(0, newOpacity);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
