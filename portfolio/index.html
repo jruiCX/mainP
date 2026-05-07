@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio | Jason Rui</title>
+
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --panel: #141414;
+      --line: #2a2a2a;
+      --text: #e9e9e9;
+      --muted: #9a9a9a;
+      --radius: 16px;
+      --max: 1100px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    .viewer {
+      margin-top: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 720px;
+      border: none;
+      background: #000;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #141414;
+      color: var(--text);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1c1c1c;
+      border-color: #444;
+    }
+
+    .desc {
+      margin-top: 30px;
+      color: #cfcfcf;
+      max-width: 700px;
+      font-size: 0.95rem;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Portfolio</h1>
+    <p class="subtitle">
+      Selected industrial design and interaction projects, focusing on product systems, user experience, and speculative scenarios.
+    </p>
+
+    <!-- PDF预览 -->
+    <div class="viewer">
+      <iframe src="./assets/portfolio.pdf"></iframe>
+    </div>
+
+    <!-- 按钮 -->
+    <div class="actions">
+      <a class="btn" href="./assets/portfolio.pdf" target="_blank">Open PDF →</a>
+      <a class="btn" href="https://drive.google.com/file/d/1Ut0GB5HXi8prYSM-QrwecjLzVtFn9bOL/view?usp=sharing" target="_blank">
+        View on Google Drive →
+      </a>
+    </div>
+
+    <!-- 简短说明 -->
+    <p class="desc">
+      This portfolio includes product design, interaction systems, and spatial concepts. The work explores assistive technology, task-based interaction, and immersive environments, combining user research, prototyping, and system-level thinking.
+    </p>
+
+  </div>
+</body>
+</html>
