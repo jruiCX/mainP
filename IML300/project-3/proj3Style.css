@@ -1,0 +1,219 @@
+.text {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw; 
+
+    
+    text-align: center; 
+
+    
+    pointer-events: none;
+    visibility: hidden; 
+}
+
+.text.active {
+    opacity: 1;
+    pointer-events: auto;  
+    visibility: visible;
+}
+
+
+
+#title {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+    
+    margin-top: 30vh;
+    font-size: 40vh;
+    transition: 1s;
+    filter: blur(0px);
+
+    
+    display: inline-block; 
+}
+
+#title:hover {
+    filter: blur(10px);
+}
+
+
+
+.subtitle {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+   
+    font-size: 10vh;
+    margin-top: 30vh;
+    transition: 1s;
+    filter: blur(0px);
+
+   
+    
+}
+
+.subtitle2{
+
+font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+   text-align: center; 
+    font-size: 5vh;
+    margin-top: 30vh;
+    transition: 1s;
+    filter: blur(0px);
+
+}
+
+#description {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+    text-align: center; 
+    font-size: 5vh;
+    margin-top: 5vh;
+    transition: 1s;
+    filter: blur(0px);
+
+    
+   
+}
+
+body {
+    background-image: url("proj3Assets/proj3Background.png");
+    background-size: cover;
+    background-attachment: scroll;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+#imgForlistenTo {
+    margin-top: 5vh;
+    transition: 0.3s ease-out;
+    animation: coolAnimation 6s infinite;
+}
+#imgForlistenTo:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    animation: none;
+}
+@keyframes coolAnimation {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+#displayText {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+   
+    font-size: 5vh;
+    margin-top: 40vh;
+    transition: 1s;
+    filter: blur(0px);
+    text-align: center; 
+}
+#displayText:hover {
+    filter: blur(5px);
+}
+#descriptionFadeIn {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    color: rgb(242, 242, 242);
+    font-style: normal;
+    text-align: center; 
+    font-size: 5vh;
+    margin-top: 5vh;
+    transition: 1s;
+    filter: blur(0px);
+    animation: fadeIn 5s forwards;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+.button-container {
+     animation: fadeIn 5s forwards;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.option-btn {
+    cursor: url('assets/wind-rosecol.png'), auto;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.option-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #a7a7a7;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+#userInput {
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* border-radius: 50px; */
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    width: 400px;
+    max-width: 600px;
+    margin: 20px auto;
+    display: block;
+}
+
+#userInput::placeholder {
+    color: rgba(145, 145, 145, 0.7);
+    font-family: "Reenie Beanie", cursive;
+    font-weight: 300;
+}
+
+#userInput:focus {
+    background: rgba(255, 255, 255, 0.3);
+    color: #a7a7a7;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+#about{
+    margin-top: 1vh; 
+    font-size: 3vh; 
+    max-width: 80%;   
+    margin-left: auto; 
+    margin-right: auto;
+    line-height: 1.1; 
+    text-align: left; 
+    white-space: pre-wrap; 
+}
