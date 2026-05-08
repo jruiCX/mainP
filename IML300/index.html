@@ -1,175 +1,914 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jason Rui | Portfolio Index</title>
+    <title>IML300 | Jason Rui</title>
     <style>
-        :root {
-            --bg: #050505;
-            --panel: #111;
-            --panel-hover: #161616;
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-muted: #888;
-            --accent: #fff;
-            --radius: 12px;
+      :root {
+        --bg: #0b0b0b;
+        --panel: #141414;
+        --panel-2: #181818;
+        --line: #262626;
+        --line-2: #353535;
+        --text: #ececec;
+        --muted: #a0a0a0;
+        --soft: #787878;
+        --link: #dcdcdc;
+        --accent: #ffffff;
+        --radius: 18px;
+        --max: 1180px;
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 24%),
+          radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.03), transparent 18%),
+          var(--bg);
+        color: var(--text);
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        letter-spacing: 0.01em;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+        transition: 0.25s ease;
+      }
+
+      a:hover {
+        color: #fff;
+      }
+
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 36px 20px 80px;
+      }
+
+      .hero {
+        padding: 34px 28px;
+        border: 1px solid var(--line);
+        border-radius: calc(var(--radius) + 4px);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 28px;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -8% -34% auto;
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 65%);
+        pointer-events: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: var(--line-2);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 4vw, 4.2rem);
+        line-height: 1.03;
+        letter-spacing: -0.05em;
+        font-weight: 650;
+      }
+
+      .hero p {
+        margin: 14px 0 0;
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .hero-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border: 1px solid var(--line-2);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+
+      .chip:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: #434343;
+      }
+
+      section {
+        margin-top: 34px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 0 0 16px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .rule {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--line-2), transparent);
+      }
+
+      .section-note {
+        margin: -4px 0 18px;
+        color: var(--muted);
+        font-size: 0.94rem;
+        max-width: 900px;
+      }
+
+      .project-stack {
+        display: grid;
+        gap: 20px;
+      }
+
+      .card {
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: #3b3b3b;
+        background: linear-gradient(180deg, #171717, #1b1b1b);
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 0;
+      }
+
+      .project-copy {
+        padding: 22px;
+        border-right: 1px solid var(--line);
+      }
+
+      .project-kicker {
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        margin-bottom: 10px;
+      }
+
+      .project-title {
+        margin: 0 0 12px;
+        font-size: 1.28rem;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+
+      .project-copy p {
+        margin: 0;
+        color: #d0d0d0;
+        font-size: 0.95rem;
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 16px 0 0;
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 13px;
+        border: 1px solid var(--line-2);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .button-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: #434343;
+      }
+
+      .project-preview {
+        padding: 14px;
+        background: #101010;
+        display: flex;
+        align-items: stretch;
+      }
+
+      .preview-shell {
+        width: 100%;
+        min-height: 330px;
+        border-radius: 14px;
+        border: 1px solid #2e2e2e;
+        background: #0f0f0f;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preview-placeholder {
+        text-align: center;
+        padding: 18px;
+        color: var(--muted);
+      }
+
+      .preview-placeholder strong {
+        display: block;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+
+      .preview-iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 330px;
+        border: 0;
+        display: none;
+        background: #000;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .grid-item {
+        overflow: hidden;
+      }
+
+      .grid-item .card-inner {
+        padding: 18px;
+      }
+
+      .grid-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .grid-item h3 {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+      }
+
+      .mini-link {
+        font-size: 0.85rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .mini-link:hover {
+        color: var(--text);
+      }
+
+      .preview-box {
+        width: 100%;
+        min-height: 240px;
+        border: 1px solid #2e2e2e;
+        border-radius: 14px;
+        background: #0f0f0f;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preview-box iframe {
+        width: 100%;
+        height: 240px;
+        border: 0;
+        display: none;
+        background: #000;
+      }
+
+      .preview-box .preview-placeholder {
+        font-size: 0.9rem;
+      }
+
+      .reflection-box {
+        border-left: 2px solid var(--accent);
+        padding: 20px;
+        font-style: italic;
+        background: rgba(255,255,255,0.03);
+        border-radius: 0 14px 14px 0;
+        color: #d7d7d7;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--soft);
+        font-size: 0.85rem;
+        text-align: center;
+      }
+
+      @media (max-width: 900px) {
+        .project-grid {
+          grid-template-columns: 1fr;
         }
 
-        * { box-sizing: border-box; }
-        body {
-            margin: 0; background: var(--bg); color: var(--text-main);
-            font-family: "Inter", -apple-system, sans-serif; line-height: 1.6;
-            overflow-x: hidden; -webkit-font-smoothing: antialiased;
+        .project-copy {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 18px 14px 56px;
         }
 
-        /* 仅在桌面端显示的微弱环境光 */
-        @media (min-width: 768px) {
-            body::before {
-                content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.03), transparent 70%);
-                z-index: -1; pointer-events: none;
-            }
+        .hero {
+          padding: 22px 18px;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
-
-        header { padding: 80px 0 60px; }
-        .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 20px; display: block; }
-        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; letter-spacing: -0.05em; margin: 0; line-height: 1; }
-        .hero-p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin-top: 24px; }
-
-        .section-label { 
-            display: flex; align-items: center; gap: 15px; margin: 60px 0 30px;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: #444;
-        }
-        .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-
-        /* 卡片设计 */
-        .card { 
-            background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
-            margin-bottom: 24px; overflow: hidden; transition: all 0.3s ease;
-        }
-        .card:hover { border-color: rgba(255,255,255,0.2); }
-
-        .project-grid { display: grid; grid-template-columns: 1fr 1.5fr; }
-        .project-info { padding: 40px; }
-        .project-title { font-size: 1.5rem; margin: 0 0 12px; font-weight: 600; }
-        .project-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; }
-
-        /* 预览容器：核心性能优化 */
-        .preview-container { 
-            background: #000; position: relative; min-height: 350px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .preview-placeholder {
-            text-align: center; cursor: pointer; z-index: 2; transition: opacity 0.3s;
-        }
-        .preview-placeholder:hover .btn-play { background: #fff; color: #000; }
-        
-        .btn-play {
-            padding: 12px 24px; border: 1px solid var(--border); border-radius: 30px;
-            background: rgba(255,255,255,0.05); color: #fff; font-size: 13px;
-            backdrop-filter: blur(5px); transition: all 0.3s;
+        .section-title h2 {
+          font-size: 1.16rem;
         }
 
-        iframe { border: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
-
-        /* 练习题网格 */
-        .exercise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .ex-card { padding: 24px; display: flex; flex-direction: column; gap: 15px; }
-
-        footer { 
-            margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; font-size: 11px; color: #444; 
+        .project-copy,
+        .grid-item .card-inner {
+          padding: 18px;
         }
 
-        @media (max-width: 850px) {
-            .project-grid { grid-template-columns: 1fr; }
-            .preview-container { min-height: 280px; }
-            h1 { font-size: 3rem; }
+        .project-preview {
+          padding: 12px;
         }
+      }
+        .project-copy {
+    position: relative;
+  }
+
+  .project-title {
+    position: sticky;
+    top: 18px;
+    z-index: 3;
+    display: inline-block;
+    padding: 8px 10px;
+    margin: 0 0 12px;
+    background: rgba(20, 20, 20, 0.96);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+  }
+
+  /* 让预览按钮居中到 frame 里 */
+  .preview-shell,
+  .preview-box {
+    position: relative;
+  }
+
+  .preview-center-button {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  background: rgba(20, 20, 20, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px);
+}
+
+  .preview-shell.is-loaded .preview-center-button,
+  .preview-box.is-loaded .preview-center-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .preview-shell .preview-placeholder,
+.preview-box .preview-placeholder {
+  transform: translateY(-50px);
+}
     </style>
-</head>
-<body>
-
-<div class="container">
-    <header>
-        <span class="eyebrow">Digital Archive v2.0</span>
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div class="eyebrow">IML300 / Portfolio Index</div>
         <h1>Jason Rui</h1>
-        <p class="hero-p">IML300 portfolio index. Integrating creative coding, critical analysis, and interactive systems.</p>
-    </header>
-
-    <div class="section-label">Selected Projects</div>
-    
-    <div class="card">
-        <div class="project-grid">
-            <div class="project-info">
-                <span class="eyebrow" style="margin-bottom:10px;">Project 01</span>
-                <h3 class="project-title">Interactive Audio & Visual</h3>
-                <p class="project-desc">A browser-based music player with dynamic visual feedback. Built with p5.sound.</p>
-                <a href="https://editor.p5js.org/jrui/sketches/bDa5IjcbT" target="_blank" class="btn-play" style="text-decoration:none;">Open in Editor →</a>
-            </div>
-            <div class="preview-container" id="p1">
-                <div class="preview-placeholder" onclick="loadIframe('p1', 'https://editor.p5js.org/jrui/full/bDa5IjcbT')">
-                    <div class="btn-play">▶ Load Preview</div>
-                </div>
-            </div>
+        <p>
+          A compact archive for IML300. Each project and exercise is hidden behind a preview button so the page stays clean and loads faster.
+        </p>
+        <div class="hero-links">
+          <a class="chip" href="#presentation">Presentation</a>
+          <a class="chip" href="#projects">Projects</a>
+          <a class="chip" href="#exercises">Exercises</a>
+          <a class="chip" href="#vibe-coding">Vibe Coding</a>
         </div>
-    </div>
+      </header>
 
-    <div class="card">
-        <div class="project-grid">
-            <div class="project-info">
-                <span class="eyebrow" style="margin-bottom:10px;">Project 02</span>
+      <section id="presentation">
+        <div class="section-title">
+          <h2>Presentation</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="card">
+          <div class="card-inner" style="padding: 22px;">
+            <a href="https://docs.google.com/presentation/d/1gSNsY2dIFRD96SluIhXnIfzViVnH0OVB/edit?usp=drive_link&ouid=103995972013688626330&rtpof=true&sd=true" target="_blank">
+              📄 Pecha Kucha: Auriea Harvey
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title">
+          <h2>Projects</h2>
+          <div class="rule"></div>
+        </div>
+        <p class="section-note">Click the preview button to load each project only when you need it.</p>
+
+        <div class="project-stack">
+          <article class="card project-card">
+            <div class="project-grid">
+              <div class="project-copy">
+                <div class="project-kicker">Project 01</div>
+                <h3 class="project-title">Interactive Audio & Visual with p5.js</h3>
+                <div class="project-links">
+                  <a class="button-link" href="https://editor.p5js.org/jrui/sketches/bDa5IjcbT" target="_blank">Open live sketch</a>
+                  <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/bDa5IjcbT" data-target="#project-preview-1">Preview</button>
+                </div>
+                <p style="margin-top: 16px;">
+                  This is a music player with built-in music and track switching through left and right arrows. The structure makes it easy to add new tracks by changing preload assets and registering them in the array.
+                </p>
+              </div>
+              <div class="project-preview">
+                <div class="preview-shell" id="project-preview-1">
+                  <div class="preview-placeholder">
+                    <strong>Preview not loaded</strong>
+                    <span>Click the button to load this project.</span>
+                  </div>
+                  <iframe class="preview-iframe" title="Project 1 preview" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-grid">
+              <div class="project-copy">
+                <div class="project-kicker">Project 02</div>
                 <h3 class="project-title">HyperNarrative</h3>
-                <p class="project-desc">A colorful world-switching journey with a whale companion.</p>
-                <a href="./project-2/project-2-travelWorldWithBWheel/index.html" class="btn-play" style="text-decoration:none;">Fullscreen Mode →</a>
-            </div>
-            <div class="preview-container" id="p2">
-                <div class="preview-placeholder" onclick="loadIframe('p2', './project-2/project-2-travelWorldWithBWheel/index.html')">
-                    <div class="btn-play">▶ Load Preview</div>
+                <div class="project-links">
+                  <a class="button-link" href="https://docs.google.com/document/d/1vkqFfOoVr9qaG09n_QKhVeN2yWwF9qwujNLq2o8MeqA/edit?usp=sharing" target="_blank">3 project ideas</a>
+                  <a class="button-link" href="project-2/project-2-1/index.html" target="_blank">Pre-exercise</a>
+                  <button class="button-link preview-toggle" type="button" data-preview-url="project-2/project-2-travelWorldWithBWheel/index.html" data-target="#project-preview-2">Preview</button>
                 </div>
+                <p style="margin-top: 16px;">
+                  My first complete webpage. I used colorful formatting and playful elements. The travel-world version lets the whale move through different places with clicks.
+                </p>
+              </div>
+              <div class="project-preview">
+                <div class="preview-shell" id="project-preview-2">
+                  <div class="preview-placeholder">
+                    <strong>Preview not loaded</strong>
+                    <span>Click the button to load this project.</span>
+                  </div>
+                  <iframe class="preview-iframe" title="Project 2 preview" loading="lazy"></iframe>
+                </div>
+              </div>
             </div>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-grid">
+              <div class="project-copy">
+                <div class="project-kicker">Project 03</div>
+                <h3 class="project-title">Networked Care</h3>
+                <div class="project-links">
+                  <button class="button-link preview-toggle" type="button" data-preview-url="project-3/proj3index.html" data-target="#project-preview-3">Preview</button>
+                  <a class="button-link" href="project-3/proj3index.html" target="_blank">Open project</a>
+                </div>
+                <p style="margin-top: 16px;">
+                  A message-sharing system built around secrets and encouragement, letting users read whispered messages from others and post their own.
+                </p>
+              </div>
+              <div class="project-preview">
+                <div class="preview-shell" id="project-preview-3">
+                  <div class="preview-placeholder">
+                    <strong>Preview not loaded</strong>
+                    <span>Click the button to load this project.</span>
+                  </div>
+                  <iframe class="preview-iframe" title="Project 3 preview" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
+      </section>
+
+      <section id="exercises">
+        <div class="section-title">
+          <h2>Exercises</h2>
+          <div class="rule"></div>
+        </div>
+        <p class="section-note">Each exercise has a preview button first, so nothing loads until you ask for it.</p>
+
+        <div class="grid-container">
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/O3e71hixo" target="_blank">p5.js Sketch 1: Face</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/O3e71hixo" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/O3e71hixo" data-target="#ex-preview-1">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-1">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 1 preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/kJxN-jrJF" target="_blank">p5.js Sketch 2: Drawing Tool</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/kJxN-jrJF" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/kJxN-jrJF" data-target="#ex-preview-2">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-2">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 2 preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/nHR7RnuzT" target="_blank">p5.js Sketch 3-A: Pattern</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/nHR7RnuzT" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/nHR7RnuzT" data-target="#ex-preview-3">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-3">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 3A preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/kHwtGDFtc" target="_blank">p5.js Sketch 3-B: Pattern</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/kHwtGDFtc" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/kHwtGDFtc" data-target="#ex-preview-4">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-4">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 3B preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/U-EzVptdo" target="_blank">p5.js Sketch 4: Music Video A</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/U-EzVptdo" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/U-EzVptdo" data-target="#ex-preview-5">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-5">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 4A preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://editor.p5js.org/jrui/sketches/qAR199xkf" target="_blank">p5.js Sketch 4: Music Video B</a></h3>
+                <a class="mini-link" href="https://editor.p5js.org/jrui/full/qAR199xkf" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://editor.p5js.org/jrui/full/qAR199xkf" data-target="#ex-preview-6">Preview</button>
+              </div>
+              <div class="preview-box" id="ex-preview-6">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the sketch.</span></div>
+                <iframe title="Exercise 4B preview" loading="lazy"></iframe>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="vibe-coding">
+        <div class="section-title">
+          <h2>Vibe Coding Project</h2>
+          <div class="rule"></div>
+        </div>
+        <p class="section-note">Same behavior here: preview is manual, so the page stays lighter and cleaner.</p>
+
+        <div class="grid-container">
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://claude.ai/public/artifacts/c546f8ef-44d3-4b6a-bb75-c350e9689bf2" target="_blank">Claude Capabilities Showcase</a></h3>
+                <a class="mini-link" href="https://claude.ai/public/artifacts/c546f8ef-44d3-4b6a-bb75-c350e9689bf2" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://claude.ai/public/artifacts/c546f8ef-44d3-4b6a-bb75-c350e9689bf2" data-target="#vc-preview-1">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-1">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Claude Capabilities Showcase preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                Showcasing web development capabilities and features Claude can implement.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://claude.ai/public/artifacts/7973a9b7-94ca-4335-b7f5-9ee196b0e58d" target="_blank">Book: Black Gooey Universe</a></h3>
+                <a class="mini-link" href="https://claude.ai/public/artifacts/7973a9b7-94ca-4335-b7f5-9ee196b0e58d" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://claude.ai/public/artifacts/7973a9b7-94ca-4335-b7f5-9ee196b0e58d" data-target="#vc-preview-2">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-2">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Black Gooey Universe preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                AI created website introducing the correlation between racial religion and GUI.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://web-explorer-lab.lovable.app/" target="_blank">World Wide Web Visualizer</a></h3>
+                <a class="mini-link" href="https://web-explorer-lab.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://web-explorer-lab.lovable.app/" data-target="#vc-preview-3">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-3">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="World Wide Web Visualizer preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                Visualizing how files are transmitted across the Web.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://neon-sparkle-score.lovable.app/" target="_blank">Molly Soda Inspiration</a></h3>
+                <a class="mini-link" href="https://neon-sparkle-score.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://neon-sparkle-score.lovable.app/" data-target="#vc-preview-4">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-4">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Molly Soda Inspiration preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                A confidence-boosting website inspired by online subcultures.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://book-to-web-craft.lovable.app/" target="_blank">In Defense of the Poor Image</a></h3>
+                <a class="mini-link" href="https://book-to-web-craft.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://book-to-web-craft.lovable.app/" data-target="#vc-preview-5">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-5">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="In Defense of the Poor Image preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                Organized reading experience for Hito Steyerl's text.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://emoji-bias-blaster.lovable.app/" target="_blank">Algorithmic Bias Blaster</a></h3>
+                <a class="mini-link" href="https://emoji-bias-blaster.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://emoji-bias-blaster.lovable.app/" data-target="#vc-preview-6">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-6">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Algorithmic Bias Blaster preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                A game-like interaction to "eliminate" bugs representing algorithmic bias.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://conscious-code-guide.lovable.app/" target="_blank">Conscious Code Guide</a></h3>
+                <a class="mini-link" href="https://conscious-code-guide.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://conscious-code-guide.lovable.app/" data-target="#vc-preview-7">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-7">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Conscious Code Guide preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                A guide on respecting user privacy in apps.
+              </p>
+            </div>
+          </article>
+
+          <article class="card grid-item">
+            <div class="card-inner">
+              <div class="grid-top">
+                <h3><a href="https://digital-bloom-play.lovable.app/" target="_blank">Digital Bloom Play</a></h3>
+                <a class="mini-link" href="https://digital-bloom-play.lovable.app/" target="_blank">Open</a>
+              </div>
+              <div class="project-links" style="margin-top: 0; margin-bottom: 12px;">
+                <button class="button-link preview-toggle" type="button" data-preview-url="https://digital-bloom-play.lovable.app/" data-target="#vc-preview-8">Preview</button>
+              </div>
+              <div class="preview-box" id="vc-preview-8">
+                <div class="preview-placeholder"><strong>Preview not loaded</strong><span>Click to load the page.</span></div>
+                <iframe title="Digital Bloom Play preview" loading="lazy"></iframe>
+              </div>
+              <p class="description" style="font-size: 0.85rem; margin-top: 10px; color: #a9a9a9;">
+                AI generated interactive code snippets based on artist's work.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div style="margin-top: 26px;">
+          <h2 style="margin: 0 0 12px; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.03em;">Reflection Thoughts</h2>
+          <p class="reflection-box">
+            Through these experiences with AI web programming... I believe it won't be long before AI becomes sufficiently versatile, transforming web programming into a quick and easy tool accessible to every artist—and indeed, everyone.
+            <br />
+            <small style="display: inline-block; margin-top: 10px; color: var(--soft);">(12.7.2025)</small>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Thoughts</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="card">
+          <div class="card-inner" style="padding: 22px;">
+            <p style="margin: 0; color: #d0d0d0;">
+              I want to learn more about web development and make more cool projects!
+              <small style="color: var(--soft);">(10.5.2025)</small>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        &copy; Fall 2025 Jason Rui. All rights reserved.
+      </footer>
     </div>
 
-    <div class="section-label">Exercises & Experiments</div>
-    <div class="exercise-grid">
-        <div class="card ex-card">
-            <h4 style="margin:0">Face Sketch</h4>
-            <div class="preview-container" id="ex1" style="min-height:240px;">
-                <div class="preview-placeholder" onclick="loadIframe('ex1', 'https://editor.p5js.org/jrui/full/O3e71hixo')">
-                    <div class="btn-play">▶ Load</div>
-                </div>
-            </div>
-        </div>
-        <div class="card ex-card">
-            <h4 style="margin:0">Drawing Tool</h4>
-            <div class="preview-container" id="ex2" style="min-height:240px;">
-                <div class="preview-placeholder" onclick="loadIframe('ex2', 'https://editor.p5js.org/jrui/full/kJxN-jrJF')">
-                    <div class="btn-play">▶ Load</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+  function loadPreview(button) {
+    const url = button.getAttribute('data-preview-url');
+    const targetSelector = button.getAttribute('data-target');
+    const shell = document.querySelector(targetSelector);
+    if (!shell) return;
 
-    <footer>
-        <div>DESIGNED BY JASON RUI</div>
-        <div>&copy; 2026 FALL_IML300</div>
-    </footer>
-</div>
+    const iframe = shell.querySelector('iframe');
+    const placeholder = shell.querySelector('.preview-placeholder');
+    if (!iframe || !placeholder) return;
 
-<script>
-    // 动态加载函数：防止手机端内存溢出
-    function loadIframe(id, url) {
-        const container = document.getElementById(id);
-        // 清空容器并插入 iframe
-        container.innerHTML = `<iframe src="${url}" allow="autoplay; capsule-image-rendering" loading="lazy"></iframe>`;
-        // 自动聚焦
-        container.querySelector('iframe').focus();
+    if (!iframe.dataset.loaded) {
+      iframe.src = url;
+      iframe.dataset.loaded = 'true';
+
+      iframe.addEventListener(
+        'load',
+        () => {
+          placeholder.style.display = 'none';
+          iframe.style.display = 'block';
+          shell.classList.add('is-loaded');
+        },
+        { once: true }
+      );
+
+      setTimeout(() => {
+        if (iframe.dataset.loaded === 'true') {
+          placeholder.style.display = 'none';
+          iframe.style.display = 'block';
+          shell.classList.add('is-loaded');
+        }
+      }, 500);
+    } else {
+      placeholder.style.display = 'none';
+      iframe.style.display = 'block';
+      shell.classList.add('is-loaded');
     }
-</script>
+  }
 
-</body>
+  document.querySelectorAll('.preview-toggle').forEach((button) => {
+    const targetSelector = button.getAttribute('data-target');
+    const shell = document.querySelector(targetSelector);
+
+    if (shell) {
+      const centerButton = button.cloneNode(true);
+      centerButton.classList.add('preview-center-button');
+      centerButton.addEventListener('click', () => loadPreview(centerButton));
+      shell.appendChild(centerButton);
+    }
+
+    button.style.display = 'none';
+    button.addEventListener('click', () => loadPreview(button));
+  });
+</script>
+  </body>
 </html>
