@@ -1,379 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IML201 | Jason Rui</title>
+    <title>Archive | Jason Rui</title>
     <style>
-      :root {
-        --bg: #0b0b0b;
-        --panel: #141414;
-        --panel-2: #181818;
-        --line: #262626;
-        --line-2: #353535;
-        --text: #ececec;
-        --muted: #a0a0a0;
-        --soft: #787878;
-        --link: #d8d8d8;
-        --radius: 18px;
-        --max: 1120px;
-        --shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
-      }
+        :root {
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --muted: #888888;
+            --accent: #ffffff;
+        }
 
-      * {
-        box-sizing: border-box;
-      }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-      html {
-        scroll-behavior: smooth;
-      }
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: "Inter", -apple-system, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-      body {
-        margin: 0;
-        background:
-          radial-gradient(circle at top, rgba(255, 255, 255, 0.06), transparent 24%),
-          radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.035), transparent 18%),
-          var(--bg);
-        color: var(--text);
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        line-height: 1.6;
-        letter-spacing: 0.01em;
-      }
+        /* 优化背景：增加一点点视差和动态感 */
+        .bg-overlay {
+            position: fixed;
+            top: -5%; left: -5%;
+            width: 110%; height: 110%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, rgba(0,0,0,0.7), #000),
+                url('./Image Project/assets/FINAL IMAGE PROJECT.png') center/cover no-repeat;
+            filter: blur(60px) saturate(0.5);
+            opacity: 0.4;
+            transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+        }
 
-      a {
-        color: var(--link);
-        text-decoration: none;
-        transition: 0.25s ease;
-      }
-
-      a:hover {
-        color: #fff;
-      }
-
-      .container {
-        max-width: var(--max);
-        margin: 0 auto;
-        padding: 36px 20px 80px;
-      }
-
-      .hero {
-        padding: 34px 28px;
-        border: 1px solid var(--line);
-        border-radius: calc(var(--radius) + 4px);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
-        box-shadow: var(--shadow);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: auto -10% -38% auto;
-        width: 320px;
-        height: 320px;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 65%);
-        pointer-events: none;
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.22em;
-        color: var(--muted);
-        margin-bottom: 14px;
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 34px;
-        height: 1px;
-        background: var(--line-2);
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.2rem, 4vw, 4rem);
-        line-height: 1.03;
-        letter-spacing: -0.04em;
-        font-weight: 650;
-      }
-
-      .hero p {
-        margin: 14px 0 0;
-        max-width: 760px;
-        color: var(--muted);
-        font-size: 1rem;
-      }
-
-      .hero-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 14px;
-        border: 1px solid var(--line-2);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.02);
-        color: var(--text);
-        font-size: 0.9rem;
-      }
-
-      .chip:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: #404040;
-      }
-
-      section {
-        margin-top: 34px;
-      }
-
-      .section-title {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin: 0 0 16px;
-      }
-
-      .section-title h2 {
-        margin: 0;
-        font-size: 1.55rem;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-      }
-
-      .section-title .rule {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, var(--line-2), transparent);
-      }
-
-      .section-note {
-        margin: -4px 0 18px;
-        color: var(--muted);
-        font-size: 0.95rem;
-        max-width: 900px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 18px;
-      }
-
-      .card {
-        background: linear-gradient(180deg, var(--panel), var(--panel-2));
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-4px);
-        border-color: #3b3b3b;
-        background: linear-gradient(180deg, #171717, #1b1b1b);
-      }
-
-      .card-inner {
-        padding: 22px;
-      }
-
-      .card-kicker {
-        color: var(--muted);
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        letter-spacing: 0.18em;
-        margin-bottom: 10px;
-      }
-
-      .card h3 {
-        margin: 0;
-        font-size: 1.28rem;
-        line-height: 1.2;
-        letter-spacing: -0.03em;
-      }
-
-      .card p {
-        margin: 10px 0 0;
-        color: #c8c8c8;
-        font-size: 0.94rem;
-      }
-
-      .card-foot {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 20px;
-        padding-top: 16px;
-        border-top: 1px solid var(--line);
-      }
-
-      .button-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 13px;
-        border: 1px solid var(--line-2);
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.02);
-        color: var(--text);
-        font-size: 0.9rem;
-        white-space: nowrap;
-      }
-
-      .button-link:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: #434343;
-      }
-
-      .status {
-        color: var(--soft);
-        font-size: 0.85rem;
-      }
-
-      .footer {
-        margin-top: 42px;
-        padding-top: 20px;
-        border-top: 1px solid var(--line);
-        color: var(--soft);
-        font-size: 0.85rem;
-        text-align: center;
-      }
-
-      @media (max-width: 640px) {
         .container {
-          padding: 18px 14px 56px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px 100px;
         }
 
-        .hero {
-          padding: 22px 18px;
+        /* --- Header --- */
+        header {
+            padding: 120px 0 60px;
+            animation: fadeIn 1.2s ease-out;
         }
 
-        .section-title h2 {
-          font-size: 1.25rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .card-inner {
-          padding: 18px;
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+            display: block;
         }
 
-        .card-foot {
-          flex-direction: column;
-          align-items: flex-start;
+        h1 {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
         }
-      }
+
+        .hero-p {
+            margin-top: 40px;
+            max-width: 550px;
+            font-size: 1.15rem;
+            color: var(--muted);
+            font-weight: 300;
+        }
+
+        /* --- ✨ 核心改动：吸顶标题 --- */
+        section {
+            margin-top: 80px;
+            /* 初始状态用于动画 */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            padding: 24px 0;
+            margin-bottom: 40px;
+            /* 滚动到顶部的模糊背景 */
+            background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header span {
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-family: serif;
+            font-style: italic;
+        }
+
+        /* --- Grid & Cards --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 40px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            background: rgba(60, 60, 60, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .card-num {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 50px;
+            letter-spacing: 0.1em;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            margin: 0 0 16px 0;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--muted);
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .card-arrow {
+            margin-top: 40px;
+            font-size: 1.4rem;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-arrow {
+            transform: translateX(8px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 200px;
+            padding-bottom: 60px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 0 24px; }
+            h1 { font-size: 3.5rem; }
+            .grid { grid-template-columns: 1fr; }
+            header { padding: 80px 0 40px; }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
+    <div class="bg-overlay" id="parallax-bg"></div>
+
     <div class="container">
-      <header class="hero">
-        <div class="eyebrow">IML201 / Course Archive</div>
-        <h1>IML201</h1>
-        <p>
-          A course index for the major projects and final presentation from IML201.
-          The section includes self-surveillance, time and power, image and emotion, and a final reflection project.
-        </p>
-        <div class="hero-links">
-          <a class="chip" href="#projects">Projects</a>
-          <a class="chip" href="#final">Final Presentation</a>
-        </div>
-      </header>
+        <header>
+            <span class="eyebrow">Project Index // 2026</span>
+            <h1>IML 201</h1>
+            <p class="hero-p">
+                A digital archive of my investigations into self-surveillance, 
+                the hierarchy of response times, and the persistence of the gaze.
+            </p>
+        </header>
 
-      <section id="projects">
-        <div class="section-title">
-          <h2>Projects</h2>
-          <div class="rule"></div>
-        </div>
-        <p class="section-note">
-          Three major projects from the course, arranged as separate entry cards for faster navigation.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-kicker">Project 01</div>
-              <h3>Surveillance Project</h3>
-              <p>
-                A self-reflective and self-critical project that defines how I am monitored, and how surveillance becomes a way to examine my own behavior and identity.
-              </p>
-              <div class="card-foot">
-                <a class="button-link" href="./Surveillance/index.html">Open project →</a>
-                <span class="status">Reflection / critique</span>
-              </div>
+        <section id="projects">
+            <div class="section-header">
+                <h2>Works</h2>
+                <span>Theory & Practice</span>
             </div>
-          </article>
+            
+            <div class="grid">
+                <a href="./Surveillance/index.html" class="card">
+                    <div>
+                        <span class="card-num">01 / REFLECTION</span>
+                        <h3>Surveillance Project</h3>
+                        <p>Defining the internal gaze. How monitoring shapes identity and behavior.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
 
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-kicker">Project 02</div>
-              <h3>Digital Argument</h3>
-              <p>
-                A project about time and power: who controls time, how power changes the value of time, and why some people can afford to respond slowly.
-              </p>
-              <div class="card-foot">
-                <a class="button-link" href="./Digital%20Argument/index.html">Open project →</a>
-                <span class="status">Time / authority</span>
-              </div>
+                <a href="./Digital Argument/index.html" class="card">
+                    <div>
+                        <span class="card-num">02 / ARGUMENT</span>
+                        <h3>Digital Argument</h3>
+                        <p>A study of time and authority: who has the luxury of responding slowly?</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
+
+                <a href="./Image Project/index.html" class="card">
+                    <div>
+                        <span class="card-num">03 / VISUAL</span>
+                        <h3>Image Project</h3>
+                        <p>The emotional weight of fast information and the vessel of intimacy.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
             </div>
-          </article>
+        </section>
 
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-kicker">Project 03</div>
-              <h3>Image Project</h3>
-              <p>
-                A poster exploring the mismatch between time, power, letters, and the emotional weight carried by fast information.
-              </p>
-              <div class="card-foot">
-                <a class="button-link" href="./Image%20Project/index.html">Open project →</a>
-                <span class="status">Image / emotion</span>
-              </div>
+        <section id="final">
+            <div class="section-header">
+                <h2>Synthesis</h2>
+                <span>Closing Presentation</span>
             </div>
-          </article>
-        </div>
-      </section>
 
-      <section id="final">
-        <div class="section-title">
-          <h2>Final Presentation</h2>
-          <div class="rule"></div>
-        </div>
-        <p class="section-note">
-          The final project summarizes what was learned across the course and brings the semester together as a closing presentation.
-        </p>
-
-        <div class="grid">
-          <article class="card">
-            <div class="card-inner">
-              <div class="card-kicker">Final</div>
-              <h3>5 Minutes of Fame</h3>
-              <p>
-                A final presentation that reflects on the course as a whole and connects the major ideas developed throughout IML201.
-              </p>
-              <div class="card-foot">
-                <a class="button-link" href="./5%20MINUTES%20OF%20FAME/index.html">Open presentation →</a>
-                <span class="status">Closing work</span>
-              </div>
+            <div class="grid">
+                <a href="./5 MINUTES OF FAME/index.html" class="card" style="grid-column: 1 / -1;">
+                    <div>
+                        <span class="card-num">FINAL / STATEMENT</span>
+                        <h3>5 Minutes of Fame</h3>
+                        <p>Bringing the semester together. Acceptance of the systems we live within.</p>
+                    </div>
+                    <div class="card-arrow">→</div>
+                </a>
             </div>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <footer class="footer">
-        &copy; Jason Rui
-      </footer>
+        <footer>
+            JASON RUI &copy; 2026 // AWARENESS IS THE DESTINATION
+        </footer>
     </div>
-  </body>
+
+    <script>
+        // 1. 滚动入场动画 (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 2. 背景视差效果 (Parallax)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const bg = document.getElementById('parallax-bg');
+            // 随滚动微调背景位置和模糊度
+            bg.style.transform = `translateY(${scrolled * 0.1}px)`;
+        });
+    </script>
+</body>
 </html>
