@@ -4,223 +4,498 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio | Jason Rui</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700|ibm-plex-mono:400,500" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/archive-lite.css" />
 
   <style>
     :root {
-      --bg: #0b0b0b;
-      --panel: #141414;
-      --line: rgba(255, 255, 255, 0.1);
-      --text: #e9e9e9;
-      --muted: #86868b; /* Apple Style Muted */
-      --accent: #ffffff;
-      --radius: 20px;
-      --max: 1100px;
+      --bg: #050505;
+      --panel: rgba(16, 16, 16, 0.82);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #f4f4f5;
+      --muted: #8b8b90;
+      --accent: #d4b896;
+      --accent-dim: rgba(212, 184, 150, 0.14);
+      --radius: 14px;
+      --max: 1120px;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       background: var(--bg);
-      background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0b0b0b 100%);
       color: var(--text);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ✨ 动态吸顶标题栏 */
-    .nav-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(11, 11, 11, 0.7);
-      border-bottom: 1px solid var(--line);
-      padding: 20px 0;
-      transition: all 0.3s ease;
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% -10%, black 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% -10%, black 20%, transparent 75%);
+      opacity: 0.55;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 85% 8%, rgba(212, 184, 150, 0.07), transparent 60%),
+        radial-gradient(ellipse 40% 35% at 10% 90%, rgba(255, 255, 255, 0.03), transparent 55%);
     }
 
     .container {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 30px;
+      padding: 0 clamp(20px, 4vw, 40px);
     }
 
-    header {
-      padding: 60px 0 40px;
-      animation: fadeInUp 0.8s ease-out forwards;
+    /* Nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 5, 5, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      margin: 0;
-      letter-spacing: -0.04em;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .subtitle {
-      margin-top: 15px;
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: var(--muted);
-      max-width: 650px;
-      font-size: 1.1rem;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-back:hover { color: var(--text); }
+    .nav-back:active { transform: scale(0.98); }
+
+    .nav-back svg { transition: transform 0.25s ease; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    .nav-brand {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-brand strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Hero - asymmetric split */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: end;
+      padding: clamp(48px, 8vw, 72px) 0 clamp(36px, 5vw, 48px);
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 5.5vw, 3.75rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.95;
+      max-width: 11ch;
+    }
+
+    .hero-copy .subtitle {
+      margin: 20px 0 0;
+      max-width: 42ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.125rem);
       font-weight: 400;
     }
 
-    /* ✨ 查看器容器 */
-    .viewer-wrapper {
-      margin-top: 20px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s 0.2s ease-out forwards;
+    .hero-meta {
+      padding-bottom: 6px;
     }
 
-    .viewer {
+    .meta-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    .meta-list span:first-child {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .meta-list span:last-child {
+      text-align: right;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--line-strong);
+      color: var(--text);
+      background: var(--accent-dim);
+    }
+
+    /* Viewer */
+    .viewer-block {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .viewer-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .viewer-shell {
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
       overflow: hidden;
-      background: #000;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      background: var(--panel);
+    }
+
+    .viewer-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .viewer-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .viewer-dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .viewer-dots i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      display: block;
+    }
+
+    .viewer-dots i:first-child { background: rgba(212, 184, 150, 0.55); }
+
+    .viewer-title {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .viewer-hint {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      flex-shrink: 0;
+    }
+
+    .viewer-frame {
+      background: #080808;
       position: relative;
     }
 
     iframe {
       width: 100%;
-      height: 75vh; /* 使用视口高度，在大屏幕上更壮观 */
-      min-height: 600px;
+      height: min(72dvh, 820px);
+      min-height: 480px;
       border: none;
       display: block;
     }
 
-    /* ✨ 底部交互区 */
-    .footer-content {
-      padding-top: 40px;
-      padding-bottom: 80px;
+    /* Footer row */
+    .footer-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.2fr auto;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: start;
+      padding: clamp(36px, 5vw, 52px) 0 clamp(64px, 8vw, 96px);
       opacity: 0;
-      animation: fadeInUp 0.8s 0.4s ease-out forwards;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    }
+
+    .footer-row.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .desc {
+      margin: 0;
       color: var(--muted);
       font-size: 1rem;
-      margin: 0;
-      text-align: justify;
+      max-width: 52ch;
     }
 
     .actions {
       display: flex;
-      gap: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
       justify-content: flex-end;
-      align-items: flex-start;
     }
 
     .btn {
-      padding: 12px 20px;
+      padding: 11px 18px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
       color: var(--text);
-      font-size: 0.9rem;
+      font-family: inherit;
+      font-size: 0.875rem;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
     .btn:hover {
-      background: #fff;
-      color: #000;
-      transform: translateY(-2px);
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.06);
     }
+
+    .btn:active { transform: scale(0.98); }
 
     .btn-primary {
-      background: #fff;
-      color: #000;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #14110d;
     }
 
-    /* 动画定义 */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .btn-primary:hover {
+      background: #e2c9a8;
+      border-color: #e2c9a8;
     }
 
-    /* 响应式调整 */
-    @media (max-width: 850px) {
-      .footer-content {
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-copy h1 { max-width: none; }
+
+      .footer-row {
         grid-template-columns: 1fr;
       }
-      .actions {
-        justify-content: flex-start;
-      }
+
+      .actions { justify-content: flex-start; }
+
       iframe {
-        height: 500px;
+        height: 56dvh;
+        min-height: 420px;
       }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      .viewer-block,
+      .footer-row {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .nav-back,
+      .btn,
+      .tag { transition: none; }
     }
   </style>
 </head>
 
 <body>
-  <nav class="nav-header">
-    <div class="container">
-      <div style="font-weight: 600; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;">
-        Jason Rui <span style="color: var(--muted); font-weight: 400; margin-left: 10px;">/ Portfolio 2026</span>
-      </div>
-    </div>
-  </nav>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="page-transition" aria-hidden="true"><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div></div>
+  <a class="archive-back" href="../index.html">&larr; Archive</a>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="bg-canvas" aria-hidden="true"></div>
 
   <div class="container">
-    <header>
-      <h1>Portfolio</h1>
-      <p class="subtitle">
-        Selected industrial design and interaction projects, focusing on product systems, user experience, and speculative scenarios.
-      </p>
+    <nav class="nav">
+      <div class="nav-brand"><strong>Jason Rui</strong> / Portfolio</div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-copy">
+        <h1>Design Portfolio</h1>
+        <p class="subtitle">
+          Industrial and interaction work across product systems, assistive technology, and speculative environments.
+        </p>
+        <div class="tags" aria-label="Focus areas">
+          <span class="tag">Product Design</span>
+          <span class="tag">Interaction Systems</span>
+          <span class="tag">Spatial Concepts</span>
+          <span class="tag">User Research</span>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <ul class="meta-list">
+          <li><span>Format</span><span>PDF Document</span></li>
+          <li><span>Year</span><span>2026</span></li>
+          <li><span>Scope</span><span>Selected Works</span></li>
+        </ul>
+      </div>
     </header>
 
-    <div class="viewer-wrapper">
-      <div class="viewer">
-        <iframe src="./assets/portfolio.pdf" title="Jason Rui Portfolio"></iframe>
+    <section class="viewer-block" aria-label="Portfolio preview">
+      <div class="viewer-shell">
+        <div class="viewer-toolbar">
+          <div class="viewer-toolbar-left">
+            <div class="viewer-dots" aria-hidden="true">
+              <i></i><i></i><i></i>
+            </div>
+            <span class="viewer-title">Jason Rui - Industrial &amp; Interaction Design</span>
+          </div>
+          <span class="viewer-hint">Scroll inside to read</span>
+        </div>
+        <div class="viewer-frame">
+          <iframe src="./assets/portfolio.pdf" title="Jason Rui Portfolio PDF"></iframe>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="footer-content">
+    <div class="footer-row">
       <p class="desc">
-        This portfolio includes product design, interaction systems, and spatial concepts. The work explores assistive technology, task-based interaction, and immersive environments, combining user research, prototyping, and system-level thinking.
+        The collection spans prototyping, system-level thinking, and immersive interaction. Use the viewer above or open the full document for download and sharing.
       </p>
 
       <div class="actions">
-        <a class="btn" href="./assets/portfolio.pdf" target="_blank">
-          <span>Open Full PDF</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        <a class="btn btn-primary" href="./assets/portfolio.pdf" target="_blank" rel="noopener">
+          Open PDF
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
         </a>
-        <a class="btn" href="https://drive.google.com/file/d/1Ut0GB5HXi8prYSM-QrwecjLzVtFn9bOL/view?usp=sharing" target="_blank">
-          <span>Google Drive</span>
+        <a class="btn" href="https://drive.google.com/file/d/1Ut0GB5HXi8prYSM-QrwecjLzVtFn9bOL/view?usp=sharing" target="_blank" rel="noopener">
+          Google Drive
         </a>
       </div>
     </div>
+
+    <footer class="site-footer">
+      <span>Built by Jason Rui</span>
+      <span>&copy; 2026</span>
+    </footer>
   </div>
 
-  <footer style="text-align: center; padding-bottom: 40px; color: #444; font-size: 0.8rem;">
-    &copy; 2026 Jason Rui. All Rights Reserved.
-  </footer>
-
+  <script src="../js/archive-lite.js"></script>
   <script>
-    // 简单的视差或交互逻辑可以在此添加
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('.nav-header');
-      if (window.scrollY > 50) {
-        nav.style.padding = '12px 0';
-        nav.style.borderBottomColor = 'rgba(255,255,255,0.15)';
-      } else {
-        nav.style.padding = '20px 0';
-        nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
-      }
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.viewer-block, .footer-row').forEach((el) => {
+      revealObserver.observe(el);
     });
   </script>
 </body>

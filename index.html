@@ -1,288 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jason Rui | Archive</title>
-    <style>
-        :root {
-            --bg: #050505;
-            --panel: rgba(18, 18, 18, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-muted: #88888b;
-            --accent: #fff;
-            --radius: 12px; /* 稍微减小圆角，显得更锐利专业 */
-        }
-
-        * { box-sizing: border-box; }
-        
-        body {
-            margin: 0;
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* ✨ 背景：网格 + 环境光 */
-        .bg-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background-image: 
-                linear-gradient(var(--border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
-            opacity: 0.4;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 40px 100px;
-        }
-
-        /* --- Header --- */
-        .nav {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 80px;
-            position: sticky;
-            top: 0;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-        }
-
-        .nav-logo {
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .nav-tag {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-family: monospace;
-        }
-
-        /* --- Hero --- */
-        .hero {
-            margin-bottom: 100px;
-            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-size: clamp(3.5rem, 10vw, 6rem);
-            font-weight: 800;
-            letter-spacing: -0.06em;
-            line-height: 0.85;
-            margin: 0 0 30px;
-            background: linear-gradient(180deg, #fff 0%, #777 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 480px;
-            font-weight: 400;
-            letter-spacing: -0.01em;
-        }
-
-        /* --- Section Styling --- */
-        .section {
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-label {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: #555;
-        }
-
-        .section-label::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        /* --- Grid & Card --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 40px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin: 0 0 10px;
-            letter-spacing: -0.03em;
-        }
-
-        .card p {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin: 0 0 40px;
-            font-weight: 400;
-        }
-
-        .card-link {
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-main);
-        }
-
-        .card-link svg {
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .card-link svg {
-            transform: translateX(4px);
-        }
-
-        /* --- Portfolio Specific (Full Width) --- */
-        .card.full {
-            grid-column: 1 / -1;
-            background: linear-gradient(90deg, rgba(20,20,20,1) 0%, rgba(10,10,10,1) 100%);
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: #444;
-            letter-spacing: 0.1em;
-        }
-
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 4rem; }
-            .container { padding: 0 24px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jason Rui | Portfolio Archive</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=outfit:400,500,600,700|ibm-plex-mono:400,500" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/archive.css" />
 </head>
 <body>
 
-    <div class="bg-canvas"></div>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 
-    <div class="container">
-        <nav class="nav">
-            <div class="nav-logo">Jason Rui</div>
-            <div class="nav-tag">INDEX_V2.0_2026</div>
-        </nav>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
-        <header class="hero">
-            <h1>Digital<br>Archive.</h1>
-            <p>Selected experiments in interaction, industrial design, and critical media studies.</p>
-        </header>
+  <div class="page-transition" aria-hidden="true">
+    <div class="panel"></div>
+    <div class="panel"></div>
+    <div class="panel"></div>
+    <div class="panel"></div>
+    <div class="panel"></div>
+  </div>
 
-        <section class="section">
-            <div class="section-label">Academic Work</div>
-            <div class="grid">
-                <a href="./IML300/index.html" class="card">
-                    <h3>IML300</h3>
-                    <p>Creative coding and vibe experiments using p5.js.</p>
-                    <div class="card-link">
-                        Explore index 
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </div>
-                </a>
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-logo">Jason Rui</div>
+      <div class="nav-meta">
+        <span class="nav-status">Archive Online</span>
+        <span class="nav-clock">00:00:00</span>
+      </div>
+    </nav>
 
-                <a href="./IML201/index.html" class="card">
-                    <h3>IML201</h3>
-                    <p>Investigations into surveillance culture and digital time.</p>
-                    <div class="card-link">
-                        Explore index
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <header class="hero">
+      <div>
+        <h1 class="hero-title">Digital<br>Archive.</h1>
+        <p class="hero-desc">Selected experiments in interaction, industrial design, and critical media studies.</p>
+      </div>
 
-        <section class="section">
-            <div class="section-label">Professional</div>
-            <div class="grid">
-                <a href="./portfolio/index.html" class="card full">
-                    <h3>Design Portfolio</h3>
-                    <p>A comprehensive collection of industrial and interaction design works.</p>
-                    <div class="card-link">
-                        View Portfolio
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </div>
-                </a>
-            </div>
-        </section>
+      <div class="hero-stats">
+        <div class="stat-row">
+          <span>Collections</span>
+          <span><span class="counter" data-count="3">0</span></span>
+        </div>
+        <div class="stat-row">
+          <span>Projects</span>
+          <span><span class="counter" data-count="12">0</span>+</span>
+        </div>
+        <div class="stat-row">
+          <span>Mediums</span>
+          <span>Code + Design</span>
+        </div>
+      </div>
+    </header>
 
-        <footer>
-            <div>BUILT BY JASON RUI</div>
-            <div>&copy; 2026 // 4.4055&deg; N, 114.2237&deg; E</div>
-        </footer>
+    <div class="marquee-wrap">
+      <div class="marquee" aria-hidden="true">
+        <span>p5.js</span><span><em>//</em></span>
+        <span>HTML/CSS/JS</span><span><em>//</em></span>
+        <span>Interaction Design</span><span><em>//</em></span>
+        <span>Critical Media</span><span><em>//</em></span>
+        <span>Industrial Design</span><span><em>//</em></span>
+        <span>Creative Coding</span><span><em>//</em></span>
+        <span>Prototyping</span><span><em>//</em></span>
+        <span>User Research</span><span><em>//</em></span>
+        <span>p5.js</span><span><em>//</em></span>
+        <span>HTML/CSS/JS</span><span><em>//</em></span>
+        <span>Interaction Design</span><span><em>//</em></span>
+        <span>Critical Media</span><span><em>//</em></span>
+        <span>Industrial Design</span><span><em>//</em></span>
+        <span>Creative Coding</span><span><em>//</em></span>
+        <span>Prototyping</span><span><em>//</em></span>
+        <span>User Research</span><span><em>//</em></span>
+      </div>
     </div>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
+    <section class="section">
+      <div class="section-label">Course Work</div>
+      <div class="grid">
+        <a href="./IML300/index.html" class="card" data-tilt data-transition>
+          <span class="card-glitch" data-label="IML300">IML300</span>
+          <div class="card-inner">
+            <div class="card-period">Creative Coding</div>
+            <h3>IML 300</h3>
+            <p>Interactive experiments, generative sketches, and multi-page web worlds built with p5.js.</p>
+            <span class="card-link">
+              Open collection
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
 
-        document.querySelectorAll('.section').forEach(s => observer.observe(s));
-    </script>
+        <a href="./IML201/index.html" class="card" data-tilt data-transition>
+          <span class="card-glitch" data-label="IML201">IML201</span>
+          <div class="card-inner">
+            <div class="card-period">Critical Media</div>
+            <h3>IML 201</h3>
+            <p>Surveillance culture, response-time hierarchies, and the persistence of the digital gaze.</p>
+            <span class="card-link">
+              Open collection
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Industrial Design</div>
+      <div class="grid">
+        <a href="./portfolio/index.html" class="card full" data-tilt data-transition>
+          <span class="card-glitch" data-label="PORTFOLIO">PORTFOLIO</span>
+          <div class="card-inner">
+            <div class="card-period">Selected Works</div>
+            <h3>Design Portfolio</h3>
+            <p>Product design, interaction systems, assistive technology, and spatial concepts in one PDF archive.</p>
+            <span class="card-link">
+              View PDF
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>Built by Jason Rui</span>
+      <span>&copy; 2026</span>
+    </footer>
+  </div>
+
+  <script src="./js/archive.js"></script>
 </body>
 </html>

@@ -210,8 +210,15 @@
             header { padding: 80px 0 40px; }
         }
     </style>
+    <link rel="stylesheet" href="../css/archive-lite.css" />
 </head>
 <body>
+
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="page-transition" aria-hidden="true"><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div></div>
+    <a class="archive-back" href="../index.html">&larr; Archive</a>
 
     <div class="bg-overlay" id="parallax-bg"></div>
 
@@ -311,5 +318,6 @@
             bg.style.transform = `translateY(${scrolled * 0.1}px)`;
         });
     </script>
+    <script src="../js/archive-lite.js"></script>
 </body>
 </html>

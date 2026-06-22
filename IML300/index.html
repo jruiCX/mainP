@@ -442,8 +442,14 @@
   transform: translateY(-50px);
 }
     </style>
+    <link rel="stylesheet" href="../css/archive-lite.css" />
   </head>
   <body>
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="page-transition" aria-hidden="true"><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div></div>
+    <a class="archive-back" href="../index.html">&larr; Archive</a>
     <div class="container">
       <header class="hero">
         <div class="eyebrow">IML300 / Portfolio Index</div>
@@ -910,5 +916,6 @@
     button.addEventListener('click', () => loadPreview(button));
   });
 </script>
+  <script src="../js/archive-lite.js"></script>
   </body>
 </html>

@@ -1,0 +1,116 @@
+/* Shared interactive layer for sub-pages */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * { cursor: none !important; }
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #6ee7ff;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(110, 231, 255, 0.45);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, background 0.35s ease;
+}
+
+.cursor-ring.is-hover {
+  width: 64px;
+  height: 64px;
+  background: rgba(110, 231, 255, 0.06);
+  border-color: rgba(110, 231, 255, 0.7);
+}
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.page-transition .panel {
+  background: #6ee7ff;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.page-transition.is-active { pointer-events: all; }
+
+.page-transition.is-active .panel {
+  animation: lite-curtain 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-transition.is-active .panel:nth-child(2) { animation-delay: 0.04s; }
+.page-transition.is-active .panel:nth-child(3) { animation-delay: 0.08s; }
+.page-transition.is-active .panel:nth-child(4) { animation-delay: 0.12s; }
+.page-transition.is-active .panel:nth-child(5) { animation-delay: 0.16s; }
+
+@keyframes lite-curtain {
+  to { transform: scaleY(1); transform-origin: top; }
+}
+
+.archive-back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(12px);
+  color: #aaa;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.archive-back:hover {
+  color: #fff;
+  border-color: rgba(110, 231, 255, 0.4);
+  background: rgba(12, 12, 16, 0.9);
+}
+
+body > .container,
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 860px) {
+  .cursor-dot, .cursor-ring { display: none; }
+  html.has-custom-cursor, html.has-custom-cursor * { cursor: auto !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition .panel { animation: none !important; }
+}
