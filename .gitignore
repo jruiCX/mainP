@@ -1,0 +1,22 @@
+# Next.js experiment folder (not part of GitHub Pages site)
+site/
+
+# Dependencies & build
+node_modules/
+.next/
+out/
+dist/
+
+# Large local media (hosted on Google Drive, not in git)
+*.mp4
+*.mov
+*.webm
+*.psd
+*.prproj
+
+# Adobe / editor junk
+**/Adobe Premiere Pro Auto-Save/
+
+# OS
+.DS_Store
+Thumbs.db

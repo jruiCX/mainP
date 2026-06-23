@@ -110,16 +110,5 @@
       const ring = document.querySelector('.cursor-ring');
       if (dot && ring) new Cursor(dot, ring);
     }
-
-    const overlay = document.querySelector('.page-transition');
-    document.querySelectorAll('a[data-transition], a.archive-back').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href || href.startsWith('http') || href.startsWith('#') || e.metaKey || e.ctrlKey || !overlay) return;
-        e.preventDefault();
-        overlay.classList.add('is-active');
-        setTimeout(() => { window.location.href = href; }, 650);
-      });
-    });
   });
 })();

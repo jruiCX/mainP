@@ -283,19 +283,6 @@
     setInterval(tick, 1000);
   }
 
-  /* ── Page transition ── */
-  function initPageTransition(overlay) {
-    document.querySelectorAll('a[data-transition]').forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (!href || href.startsWith('http') || href.startsWith('#') || e.metaKey || e.ctrlKey) return;
-        e.preventDefault();
-        overlay.classList.add('is-active');
-        setTimeout(() => { window.location.href = href; }, 650);
-      });
-    });
-  }
-
   /* ── Glitch label on cards ── */
   function initGlitchLabels() {
     const chars = '01アイウエオ';
@@ -326,16 +313,24 @@
     const desc = document.querySelector('.hero-desc');
     if (desc && !prefersReduced) {
       const scramble = new TextScramble(desc);
-      const phrases = [
-        'Selected experiments in interaction, industrial design, and critical media studies.',
-        'Creative code, critical media, industrial design.',
-        'One archive. Many experiments.',
-      ];
+      let phrases = window.ArchiveI18n
+        ? window.ArchiveI18n.getScramblePhrases()
+        : [
+            'Selected experiments in interaction, industrial design, and critical media studies.',
+            'Creative code, critical media, industrial design.',
+            'One archive. Many experiments.',
+          ];
       let idx = 0;
-      setInterval(() => {
+      const rotate = () => {
         idx = (idx + 1) % phrases.length;
         scramble.setText(phrases[idx]);
-      }, 4200);
+      };
+      setInterval(rotate, 4200);
+      document.addEventListener('langchange', (e) => {
+        phrases = e.detail.phrases;
+        idx = 0;
+        desc.textContent = phrases[0];
+      });
     }
 
     initTiltCards();
@@ -345,7 +340,6 @@
     animateCounters();
     initClock(document.querySelector('.nav-clock'));
 
-    initPageTransition(document.querySelector('.page-transition'));
     initGlitchLabels();
   });
 })();

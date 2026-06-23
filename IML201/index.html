@@ -34,7 +34,7 @@
             z-index: -1;
             background: 
                 linear-gradient(to bottom, rgba(0,0,0,0.7), #000),
-                url('./Image Project/assets/FINAL IMAGE PROJECT.png') center/cover no-repeat;
+                url('./assets/FINAL IMAGE PROJECT.png') center/cover no-repeat;
             filter: blur(60px) saturate(0.5);
             opacity: 0.4;
             transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
@@ -138,6 +138,25 @@
             gap: 24px;
         }
 
+        /* 三个项目：上二下一，避免右下角空一块 */
+        .grid-projects {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-projects .card:last-child {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 720px) {
+            .grid-projects {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-projects .card:last-child {
+                grid-column: auto;
+            }
+        }
+
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -217,7 +236,6 @@
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
-    <div class="page-transition" aria-hidden="true"><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div><div class="panel"></div></div>
     <a class="archive-back" href="../index.html">&larr; Archive</a>
 
     <div class="bg-overlay" id="parallax-bg"></div>
@@ -238,17 +256,17 @@
                 <span>Theory & Practice</span>
             </div>
             
-            <div class="grid">
-                <a href="./Surveillance/index.html" class="card">
+            <div class="grid grid-projects">
+                <a href="./assets/FINAL IMAGE PROJECT.png" class="card" target="_blank" rel="noopener">
                     <div>
-                        <span class="card-num">01 / REFLECTION</span>
-                        <h3>Surveillance Project</h3>
-                        <p>Defining the internal gaze. How monitoring shapes identity and behavior.</p>
+                        <span class="card-num">01 / VISUAL</span>
+                        <h3>Image Project</h3>
+                        <p>The emotional weight of fast information and the vessel of intimacy.</p>
                     </div>
                     <div class="card-arrow">→</div>
                 </a>
 
-                <a href="./Digital Argument/index.html" class="card">
+                <a href="https://drive.google.com/file/d/1cKXr0EIXuREf8eYTq1goNjvhq_KpqQdV/view?usp=sharing" class="card" target="_blank" rel="noopener">
                     <div>
                         <span class="card-num">02 / ARGUMENT</span>
                         <h3>Digital Argument</h3>
@@ -257,11 +275,11 @@
                     <div class="card-arrow">→</div>
                 </a>
 
-                <a href="./Image Project/index.html" class="card">
+                <a href="https://drive.google.com/file/d/11W2l3atdvMuZHadM60sqAM8Ow-t1MdpK/view?usp=sharing" class="card" target="_blank" rel="noopener">
                     <div>
-                        <span class="card-num">03 / VISUAL</span>
-                        <h3>Image Project</h3>
-                        <p>The emotional weight of fast information and the vessel of intimacy.</p>
+                        <span class="card-num">03 / REFLECTION</span>
+                        <h3>Surveillance Project</h3>
+                        <p>Defining the internal gaze. How monitoring shapes identity and behavior.</p>
                     </div>
                     <div class="card-arrow">→</div>
                 </a>

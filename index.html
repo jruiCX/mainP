@@ -17,19 +17,12 @@
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
 
-  <div class="page-transition" aria-hidden="true">
-    <div class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
-  </div>
-
   <div class="container">
     <nav class="nav">
       <div class="nav-logo">Jason Rui</div>
       <div class="nav-meta">
-        <span class="nav-status">Archive Online</span>
+        <span class="nav-status" data-i18n="nav.status">Archive Online</span>
+        <button type="button" class="lang-toggle" data-lang-toggle aria-label="Switch language">中文</button>
         <span class="nav-clock">00:00:00</span>
       </div>
     </nav>
@@ -37,21 +30,21 @@
     <header class="hero">
       <div>
         <h1 class="hero-title">Digital<br>Archive.</h1>
-        <p class="hero-desc">Selected experiments in interaction, industrial design, and critical media studies.</p>
+        <p class="hero-desc" data-i18n="hero.desc">Selected experiments in interaction, industrial design, and critical media studies.</p>
       </div>
 
       <div class="hero-stats">
         <div class="stat-row">
-          <span>Collections</span>
+          <span data-i18n="stat.collections">Collections</span>
           <span><span class="counter" data-count="3">0</span></span>
         </div>
         <div class="stat-row">
-          <span>Projects</span>
+          <span data-i18n="stat.projects">Projects</span>
           <span><span class="counter" data-count="12">0</span>+</span>
         </div>
         <div class="stat-row">
-          <span>Mediums</span>
-          <span>Code + Design</span>
+          <span data-i18n="stat.mediums">Mediums</span>
+          <span data-i18n="stat.mediums.val">Code + Design</span>
         </div>
       </div>
     </header>
@@ -78,29 +71,29 @@
     </div>
 
     <section class="section">
-      <div class="section-label">Course Work</div>
+      <div class="section-label" data-i18n="section.coursework">Course Work</div>
       <div class="grid">
-        <a href="./IML300/index.html" class="card" data-tilt data-transition>
+        <a href="./IML300/index.html" class="card" data-tilt>
           <span class="card-glitch" data-label="IML300">IML300</span>
           <div class="card-inner">
-            <div class="card-period">Creative Coding</div>
+            <div class="card-period" data-i18n="card.iml300.period">Creative Coding</div>
             <h3>IML 300</h3>
-            <p>Interactive experiments, generative sketches, and multi-page web worlds built with p5.js.</p>
+            <p data-i18n="card.iml300.desc">Interactive experiments, generative sketches, and multi-page web worlds built with p5.js.</p>
             <span class="card-link">
-              Open collection
+              <span data-i18n="card.link.open">Open collection</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </span>
           </div>
         </a>
 
-        <a href="./IML201/index.html" class="card" data-tilt data-transition>
+        <a href="./IML201/index.html" class="card" data-tilt>
           <span class="card-glitch" data-label="IML201">IML201</span>
           <div class="card-inner">
-            <div class="card-period">Critical Media</div>
+            <div class="card-period" data-i18n="card.iml201.period">Critical Media</div>
             <h3>IML 201</h3>
-            <p>Surveillance culture, response-time hierarchies, and the persistence of the digital gaze.</p>
+            <p data-i18n="card.iml201.desc">Surveillance culture, response-time hierarchies, and the persistence of the digital gaze.</p>
             <span class="card-link">
-              Open collection
+              <span data-i18n="card.link.open">Open collection</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </span>
           </div>
@@ -109,16 +102,16 @@
     </section>
 
     <section class="section">
-      <div class="section-label">Industrial Design</div>
+      <div class="section-label" data-i18n="section.industrial">Industrial Design</div>
       <div class="grid">
-        <a href="./portfolio/index.html" class="card full" data-tilt data-transition>
+        <a href="./portfolio/index.html" class="card full" data-tilt>
           <span class="card-glitch" data-label="PORTFOLIO">PORTFOLIO</span>
           <div class="card-inner">
-            <div class="card-period">Selected Works</div>
+            <div class="card-period" data-i18n="card.portfolio.period">Selected Works</div>
             <h3>Design Portfolio</h3>
-            <p>Product design, interaction systems, assistive technology, and spatial concepts in one PDF archive.</p>
+            <p data-i18n="card.portfolio.desc">Product design, interaction systems, assistive technology, and spatial concepts in one PDF archive.</p>
             <span class="card-link">
-              View PDF
+              <span data-i18n="card.link.pdf">View PDF</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </span>
           </div>
@@ -126,12 +119,55 @@
       </div>
     </section>
 
+    <section class="about-footer section">
+      <div class="section-label" data-i18n="about.heading">About</div>
+      <div class="about-grid">
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.name">Name</span>
+          <span class="about-val" data-i18n="about.name.val">芮晨轩 Jason (Jason Rui)</span>
+        </div>
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.role">Role</span>
+          <span class="about-val" data-i18n="about.role.val">Product Designer / Frontend Engineer / Creative Developer</span>
+        </div>
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.tagline">Focus</span>
+          <span class="about-val" data-i18n="about.tagline.val">Design that helps people</span>
+        </div>
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.site">Work</span>
+          <span class="about-val" data-i18n="about.site.val">Everything lives on this site for now. More coming soon.</span>
+        </div>
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.stack">Stack</span>
+          <span class="about-val" data-i18n="about.stack.val">No fixed preference. Happy to learn anything.</span>
+        </div>
+        <div class="about-row">
+          <span class="about-key" data-i18n="about.projects">Projects</span>
+          <span class="about-val" data-i18n="about.projects.val">Still growing. Not counting yet.</span>
+        </div>
+        <div class="about-row about-row-contact">
+          <span class="about-key" data-i18n="about.contact">Contact</span>
+          <span class="about-val about-contact">
+            <a href="mailto:Jrui@usc.edu">Jrui@usc.edu</a>
+            <span class="about-sep">/</span>
+            <a href="tel:+12132139634">+1 213 213 9634</a>
+            <span class="about-sep">/</span>
+            <a href="tel:+8613811804167">+86 138 1180 4167</a>
+            <span class="about-sep">/</span>
+            <a href="mailto:ruichenxuan@126.com">ruichenxuan@126.com</a>
+          </span>
+        </div>
+      </div>
+    </section>
+
     <footer class="site-footer">
-      <span>Built by Jason Rui</span>
+      <span data-i18n="footer.built">Built by Jason Rui</span>
       <span>&copy; 2026</span>
     </footer>
   </div>
 
+  <script src="./js/i18n.js"></script>
   <script src="./js/archive.js"></script>
 </body>
 </html>
